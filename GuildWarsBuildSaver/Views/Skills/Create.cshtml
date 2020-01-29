@@ -1,0 +1,73 @@
+﻿@model GuildWarsBuildSaver.Models.Skill
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Skill</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Desc" class="control-label"></label>
+                <input asp-for="Desc" class="form-control" />
+                <span asp-validation-for="Desc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeaponType" class="control-label"></label>
+                <input asp-for="WeaponType" class="form-control" />
+                <span asp-validation-for="WeaponType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NextChain" class="control-label"></label>
+                <input asp-for="NextChain" class="form-control" />
+                <span asp-validation-for="NextChain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PreviousChain" class="control-label"></label>
+                <input asp-for="PreviousChain" class="form-control" />
+                <span asp-validation-for="PreviousChain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FlipSkill" class="control-label"></label>
+                <input asp-for="FlipSkill" class="form-control" />
+                <span asp-validation-for="FlipSkill" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChatLink" class="control-label"></label>
+                <input asp-for="ChatLink" class="form-control" />
+                <span asp-validation-for="ChatLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slot" class="control-label"></label>
+                <input asp-for="Slot" class="form-control" />
+                <span asp-validation-for="Slot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icon" class="control-label"></label>
+                <input asp-for="Icon" class="form-control" />
+                <span asp-validation-for="Icon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
