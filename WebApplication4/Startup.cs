@@ -10,10 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-//using Microsoft.EntityFrameworkCore;
-using GuildWarsBuildSaver.Models;
 
-namespace GuildWarsBuildSaver
+namespace WebApplication4
 {
     public class Startup
     {
@@ -27,10 +25,6 @@ namespace GuildWarsBuildSaver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            //services.AddDbContext<SkillContext>(opt =>
-            //   opt.UseCosmos(Secrets.AccountEndpoint, Secrets.AccountKey, "gw2"));
-            //
             services.AddControllers();
         }
 
