@@ -6,102 +6,117 @@
     using Microsoft.AspNetCore.Mvc;
     using Models;
 
-    public class SkillController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SkillController : ControllerBase
     {
-        private readonly ICosmosDbService _cosmosDbService;
-        public SkillController(ICosmosDbService cosmosDbService)
+        private readonly SkillService _skillService;
+
+        public SkillController(SkillService skillService)
         {
-            _cosmosDbService = cosmosDbService;
+            _skillService = skillService;
         }
 
-        [ActionName("Index")]
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            return View(await _cosmosDbService.GetItemsAsync("SELECT * FROM c"));
+            return (IActionResult) await _skillService.GetItemsAsync("Select * from c");
         }
 
-        [ActionName("Create")]
-        public IActionResult Create()
+        [HttpGet("{id}")]
+        public async Task<Skill> Get(string id)
         {
-            return View();
+            return await _skillService.GetItemAsync(id);
         }
 
-        [HttpPost]
-        [ActionName("Create")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAsync([Bind("Id,Name,Description,Completed")] Skill skill)
-        {
-            if (ModelState.IsValid)
-            {
-                skill.Id = Guid.NewGuid().ToString();
-                await _cosmosDbService.AddItemAsync(skill);
-                return RedirectToAction("Index");
-            }
+        //[ActionName("Index")]
+        //public async Task<IActionResult> Index()
+        //{
+        //    return await _skillService.GetItemsAsync("SELECT * FROM c"));
+        //}
 
-            return View(skill);
-        }
+        //[ActionName("Create")]
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        [ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] Skill skill)
-        {
-            if (ModelState.IsValid)
-            {
-                await _cosmosDbService.UpdateItemAsync(skill.Id, skill);
-                return RedirectToAction("Index");
-            }
+        //[ActionName("Create")]
+        //[ValidateAntiForgeryToken]
+        //[HttpPost]
+        //public async Task<ActionResult> CreateAsync([Bind("Id,Name,Description,Completed")] Skill skill)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        skill.Id = Guid.NewGuid().ToString();
+        //        await _cosmosDbService.AddItemAsync(skill);
+        //        return RedirectToAction("Index");
+        //    }
+        //
+        //    return View(skill);
+        //}
 
-            return View(skill);
-        }
+        //[HttpPost]
+        //[ActionName("Edit")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> EditAsync([Bind("Id,Name,Description,Completed")] Skill skill)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _cosmosDbService.UpdateItemAsync(skill.Id, skill);
+        //        return RedirectToAction("Index");
+        //    }
+        //
+        //    return View(skill);
+        //}
 
-        [ActionName("Edit")]
-        public async Task<ActionResult> EditAsync(string id)
-        {
-            if (id == null)
-            {
-                return BadRequest();
-            }
+        //[ActionName("Edit")]
+        //public async Task<ActionResult> EditAsync(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //
+        //    Skill skill = await _cosmosDbService.GetItemAsync(id);
+        //    if (skill == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //
+        //    return View(skill);
+        //}
 
-            Skill skill = await _cosmosDbService.GetItemAsync(id);
-            if (skill == null)
-            {
-                return NotFound();
-            }
-
-            return View(skill);
-        }
-
-        [ActionName("Delete")]
-        public async Task<ActionResult> DeleteAsync(string id)
-        {
-            if (id == null)
-            {
-                return BadRequest();
-            }
-
-            Skill skill = await _cosmosDbService.GetItemAsync(id);
-            if (skill == null)
-            {
-                return NotFound();
-            }
-
-            return View(skill);
-        }
-
-        [HttpPost]
-        [ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmedAsync([Bind("Id")] string id)
-        {
-            await _cosmosDbService.DeleteItemAsync(id);
-            return RedirectToAction("Index");
-        }
-
-        [ActionName("Details")]
-        public async Task<ActionResult> DetailsAsync(string id)
-        {
-            return View(await _cosmosDbService.GetItemAsync(id));
-        }
+        //[ActionName("Delete")]
+        //public async Task<ActionResult> DeleteAsync(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //
+        //    Skill skill = await _cosmosDbService.GetItemAsync(id);
+        //    if (skill == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //
+        //    return View(skill);
+        //}
+        //
+        //[HttpPost]
+        //[ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmedAsync([Bind("Id")] string id)
+        //{
+        //    await _cosmosDbService.DeleteItemAsync(id);
+        //    return RedirectToAction("Index");
+        //}
+        //
+        //[ActionName("Details")]
+        //public async Task<ActionResult> DetailsAsync(string id)
+        //{
+        //    return View(await _cosmosDbService.GetItemAsync(id));
+        //}
     }
 }
