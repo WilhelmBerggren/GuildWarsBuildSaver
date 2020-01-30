@@ -21,19 +21,19 @@ namespace WebApplication4.Services
 
         public async Task AddItemAsync(Skill skill)
         {
-            await this._container.CreateItemAsync<Skill>(skill, new PartitionKey(skill.Id));
+            await this._container.CreateItemAsync<Skill>(skill, new PartitionKey("name"));
         }
 
-        public async Task DeleteItemAsync(string id)
+        public async Task DeleteItemAsync(string name)
         {
-            await this._container.DeleteItemAsync<Skill>(id, new PartitionKey(id));
+            await this._container.DeleteItemAsync<Skill>(name, new PartitionKey("name"));
         }
 
         public async Task<Skill> GetItemAsync(string id)
         {
             try
             {
-                ItemResponse<Skill> response = await this._container.ReadItemAsync<Skill>(id, new PartitionKey(id));
+                ItemResponse<Skill> response = await this._container.ReadItemAsync<Skill>(id, new PartitionKey("name"));
                 return response.Resource;
             }
             catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
@@ -60,7 +60,7 @@ namespace WebApplication4.Services
 
         public async Task UpdateItemAsync(string id, Skill skill)
         {
-            await this._container.UpsertItemAsync<Skill>(skill, new PartitionKey(id));
+            await this._container.UpsertItemAsync<Skill>(skill, new PartitionKey("name"));
         }
     }
 }

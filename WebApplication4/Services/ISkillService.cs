@@ -10,7 +10,7 @@ namespace WebApplication4.Services
 
         Task DeleteItemAsync(string id);
 
-        Task<Skill> GetItemAsync(string id);
+        Task<Skill> GetItemAsync(string name);
 
         Task<IEnumerable<Skill>> GetItemsAsync(string queryString);
 

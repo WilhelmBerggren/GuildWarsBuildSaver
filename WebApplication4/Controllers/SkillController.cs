@@ -24,10 +24,11 @@ namespace WebApplication4.Controllers
         [HttpGet]
         public async Task<IEnumerable<Skill>> Get()
         {
-            Console.WriteLine(_skillService);
-
-            return await _skillService.GetItemsAsync("select * from c");
+            //Console.WriteLine(_skillService);
+            var asdf = await _skillService.GetItemsAsync("select * from c");
+            return asdf;
         }
+
 
         // GET: api/Skill/5
         [HttpGet("{id}", Name = "Get")]
