@@ -14,9 +14,93 @@ namespace CosmosEntityTest
     {
         static async Task Main(string[] args)
         {
+            CosmosClient cosmosClient = null;
+            Database database = null;
+            Container container = null;
 
+            Console.WriteLine("Connect to Database or Reboot? \n" +
+                "[1]: Connect to existing database. \n" +
+                "[9]: Reboot database. \n");
+
+            ConsoleKey menu = Console.ReadKey().Key;
+
+            switch (menu)
+            {
+                case ConsoleKey.D1:
+                    Console.WriteLine("Connecting to existing db. . .");
+                    ConnectToDatabase(out cosmosClient, out database, out container);
+                break;
+                case ConsoleKey.D9:
+                    Console.WriteLine("Rebooting db. . .");
+                    await RebootDB(cosmosClient, database, container);
+                break;
+            }
+        }
+
+        
+        //GetSkill and Filter methods for Lists and Skills
+
+        public static async Task<Skill> GetSkillFromDBAsync(CosmosClient cosmosClient, string name, string id)
+        {
+            Container container = cosmosClient.GetContainer("SkillsDB", "SkillContainer");
+
+            Skill skill = await container.ReadItemAsync<Skill>(id, new PartitionKey(name));
+            return skill;
+        }
+
+        public static async Task<List<Skill>> GetSkillsByProfession(CosmosClient cosmosClient, string profession)
+        {
+            Container container = cosmosClient.GetContainer("SkillsDB", "SkillContainer");
+
+            var queryText = $"SELECT * FROM SkillsContainer s WHERE s.professions = ['{profession}']";
+            QueryDefinition query = new QueryDefinition(queryText);
+            FeedIterator<Skill> feedIterator = container.GetItemQueryIterator<Skill>(query);
+
+            var list = new List<Skill>();
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<Skill> currentResultSet = await feedIterator.ReadNextAsync();
+                list.AddRange(currentResultSet);
+            }
+
+            return list;
+        }
+
+        public static Skill GetItemFromList(List<Skill> list, string id)
+        {
+            var query = from item in list
+                        where item.Id == id
+                        select item;
+
+            return query.FirstOrDefault();
+        }
+
+        public static IEnumerable<Skill> FilterList(List<Skill> list, string requestedFilter)
+        {
+            var query = from item in list
+                        where item.Type == $"{requestedFilter}"
+                        select item;
+
+            return query;
+        }
+
+
+
+
+
+        // Methods for Connecting to existing or replacing existing DB
+
+        private static void ConnectToDatabase(out CosmosClient cosmosClient, out Database database, out Container container)
+        {
+            cosmosClient = new CosmosClient("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+            database = cosmosClient.GetDatabase("SkillsDB");
+            container = database.GetContainer("SkillContainer");
+        }
+
+        private static async Task RebootDB(CosmosClient cosmosClient, Database database, Container container)
+        {
             //Create Cosmos Client and connect to CosmosDB
-            CosmosClient cosmosClient = new CosmosClient("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
+            cosmosClient = new CosmosClient("https://localhost:8081", "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==");
 
             //If DB exists remove it before proceeding
             try
@@ -30,11 +114,11 @@ namespace CosmosEntityTest
             }
 
             //Create DB and reference to DB
-            Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SkillsDB");
+            database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SkillsDB");
             Console.WriteLine("Created Database: {0}\n", database.Id);
 
             //Create Container and reference to DB
-            Container container = await database.CreateContainerIfNotExistsAsync("SkillContainer", "/name");
+            container = await database.CreateContainerIfNotExistsAsync("SkillContainer", "/name");
             Console.WriteLine($"Created Container: {container.Id}");
 
             var filename = @"C:\Users\nilss\Documents\Programmering\GuildWarsBuildSaver\GuildWarsBuildSaver\response.json";
@@ -61,50 +145,6 @@ namespace CosmosEntityTest
                     Console.WriteLine("Bad Request: Item already exists: ");
                 }
             }
-        }
-
-        public async Task<Skill> GetSkillFromDBAsync(CosmosClient cosmosClient, string name, string id)
-        {
-            Container container = cosmosClient.GetContainer("SkillsDB", "SkillsContainer");
-
-            Skill skill = await container.ReadItemAsync<Skill>(id, new PartitionKey(name));
-            return skill;
-        }
-
-        public async Task<List<Skill>> GetSkillsByProfession(CosmosClient cosmosClient, string profession)
-        {
-            Container container = cosmosClient.GetContainer("SkillsDB", "SkillsContainer");
-
-            var queryText = $"SELECT * FROM SkillsContainer s WHERE s.professions = ['{profession}']";
-            QueryDefinition query = new QueryDefinition(queryText);
-            FeedIterator<Skill> feedIterator = container.GetItemQueryIterator<Skill>(query);
-
-            var list = new List<Skill>();
-            while (feedIterator.HasMoreResults)
-            {
-                FeedResponse<Skill> currentResultSet = await feedIterator.ReadNextAsync();
-                list.AddRange(currentResultSet);
-            }
-
-            return list;
-        }
-
-        public Skill GetItemFromList(List<Skill> list, string id)
-        {
-            var query = from item in list
-                        where item.Id == $"{id}"
-                        select item;
-
-            return query.FirstOrDefault();
-        }
-
-        public IEnumerable<Skill> FilterList(List<Skill> list, string requestedFilter)
-        {
-            var query = from item in list
-                        where item.Type == $"{requestedFilter}"
-                        select item;
-
-            return query;
         }
     }
 
