@@ -15,12 +15,6 @@ namespace GuildWarsBuildSaver
     {
         public static void Main(string[] args)
         {
-
-            //var filename = @"C:\Users\wilhe\source\repos\GuildWarsBuildSaver//\GuildWarsBuildSaver\response.json";
-            //var jsonString = System.IO.File.ReadAllText(filename);
-            //var skills = JsonSerializer.Deserialize<List<Skill>>(jsonString);
-            ////var asdf = skills.Select((i) => i).Where((i) => i.id == 1175);
-            //return;
             CreateHostBuilder(args).Build().Run();
         }
 
