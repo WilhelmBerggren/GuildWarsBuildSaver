@@ -17,6 +17,7 @@ namespace CosmosEntityTest
             CosmosClient cosmosClient = null;
             Database database = null;
             Container container = null;
+            Container buildContainer = null;
 
             Console.WriteLine("Connect to Database or Reboot? \n" +
                 "[1]: Connect to existing database. \n" +
@@ -118,7 +119,7 @@ namespace CosmosEntityTest
             Console.WriteLine("Created Database: {0}\n", database.Id);
 
             //Create Container and reference to DB
-            container = await database.CreateContainerIfNotExistsAsync("SkillContainer", "/name");
+            container = await database.CreateContainerIfNotExistsAsync("SkillContainer", "/type");
             Console.WriteLine($"Created Container: {container.Id}");
 
             var filename = @"C:\Users\nilss\Documents\Programmering\GuildWarsBuildSaver\GuildWarsBuildSaver\response.json";
