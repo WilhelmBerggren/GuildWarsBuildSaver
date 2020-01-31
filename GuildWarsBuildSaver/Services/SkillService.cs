@@ -62,5 +62,45 @@ namespace GuildWarsBuildSaver.Services
         {
             await this._container.UpsertItemAsync<Skill>(skill, new PartitionKey("name"));
         }
+
+        public async Task<Skill> GetSkillFromDBAsync(string name, string id)
+        {
+            Skill skill = await _container.ReadItemAsync<Skill>(id, new PartitionKey(name));
+            return skill;
+        }
+
+        public async Task<List<Skill>> GetSkillsByProfession(string profession)
+        {
+            var queryText = $"SELECT * FROM SkillsContainer s WHERE s.professions = ['{profession}']";
+            QueryDefinition query = new QueryDefinition(queryText);
+            FeedIterator<Skill> feedIterator = _container.GetItemQueryIterator<Skill>(query);
+
+            var list = new List<Skill>();
+            while (feedIterator.HasMoreResults)
+            {
+                FeedResponse<Skill> currentResultSet = await feedIterator.ReadNextAsync();
+                list.AddRange(currentResultSet);
+            }
+
+            return list;
+        }
+
+        public Skill GetItemFromList(List<Skill> list, string id)
+        {
+            var query = from item in list
+                        where item.Id == id
+                        select item;
+
+            return query.FirstOrDefault();
+        }
+
+        public IEnumerable<Skill> FilterList(List<Skill> list, string requestedFilter)
+        {
+            var query = from item in list
+                        where item.Type == $"{requestedFilter}"
+                        select item;
+
+            return query;
+        }
     }
 }
