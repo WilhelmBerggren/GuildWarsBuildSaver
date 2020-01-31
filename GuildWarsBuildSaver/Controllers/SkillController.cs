@@ -25,7 +25,7 @@ namespace GuildWarsBuildSaver.Controllers
         public async Task<IEnumerable<Skill>> Get()
         {
             //Console.WriteLine(_skillService);
-            var asdf = await _skillService.GetItemsAsync("select * from c");
+            var asdf = await _skillService.GetSkillsByProfession("Thief"); //.GetItemsAsync("select * from c");
             return asdf;
         }
 
@@ -34,7 +34,7 @@ namespace GuildWarsBuildSaver.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<Skill>Get(string id)
         {
-            return await _skillService.GetItemAsync(id);
+            return await _skillService.GetItemAsync(id, "Utility");
 
             //return "value";
         }
