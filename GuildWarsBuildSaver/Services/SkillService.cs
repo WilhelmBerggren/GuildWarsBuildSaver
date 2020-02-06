@@ -51,7 +51,6 @@ namespace GuildWarsBuildSaver.Services
             }
             catch (CosmosException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                Console.WriteLine($"Did not find Skill: {id}");
                 return null;
             }
         }
@@ -143,7 +142,7 @@ namespace GuildWarsBuildSaver.Services
 
             Console.WriteLine($"Created Container: {container.Id}");
 
-            var filename = @"C:\Users\wilhe\source\repos\GuildWarsBuildSaver\GuildWarsBuildSaver\response.json";
+            string filename = Path.Combine(Environment.CurrentDirectory, "response.json");
 
             List<Skill> skills;
             JsonSerializer serializer = new JsonSerializer();

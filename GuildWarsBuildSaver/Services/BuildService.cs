@@ -30,7 +30,7 @@ namespace GuildWarsBuildSaver.Services
             await database.CreateContainerIfNotExistsAsync(settings.BuildContainerName, "/id");
         }
 
-        public async Task<ItemResponse<Build>> CreateBuild(Build build)
+        public async Task<Build> CreateBuild(Build build)
         {
             if (ValidBuild(build))
                 return await _container.CreateItemAsync<Build>(build);
@@ -51,7 +51,7 @@ namespace GuildWarsBuildSaver.Services
             return _container.DeleteItemAsync<Build>(id, new PartitionKey(id));
         }
 
-        public async Task<ItemResponse<Build>> GetBuild(string id)
+        public async Task<Build> GetBuild(string id)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace GuildWarsBuildSaver.Services
             return results;
         }
 
-        public async Task<ItemResponse<Build>> UpdateBuild(string id, Build build)
+        public async Task<Build> UpdateBuild(string id, Build build)
         {
             return await _container.UpsertItemAsync<Build>(build);
         }

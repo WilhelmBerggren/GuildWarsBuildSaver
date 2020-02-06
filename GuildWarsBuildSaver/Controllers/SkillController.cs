@@ -24,15 +24,19 @@ namespace GuildWarsBuildSaver.Controllers
         [HttpGet]
         public async Task<IEnumerable<Skill>> GetSkill()
         {
-            //Console.WriteLine(_skillService);
-            var asdf = await _skillService.GetSkillsByProfession("Thief"); //.GetItemsAsync("select * from c");
-            return asdf;
+            return await _skillService.GetSkills();
         }
 
+        // GET: api/Skill/Profession/thief
+        [HttpGet("Profession/{profession}", Name = "GetSkillByProfession")]
+        public async Task<IEnumerable<Skill>> GetSkill(string profession)
+        {
+            return await _skillService.GetSkillsByProfession(profession);
+        }
 
         // GET: api/Skill/5
-        [HttpGet("{id}", Name ="GetSkill")]
-        public async Task<Skill>Get(string id)
+        [HttpGet("{id}", Name = "GetSkill")]
+        public async Task<Skill> Get(string id)
         {
             return await _skillService.GetSkill(id);
         }

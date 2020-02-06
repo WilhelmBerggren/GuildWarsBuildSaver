@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuildWarsBuildSaver", "GuildWarsBuildSaver\GuildWarsBuildSaver.csproj", "{A2DAF710-FC9C-4D23-A79B-B0D48799D00D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2Builds_Console", "GW2Builds_Console\GW2Builds_Console.csproj", "{A519B285-9204-4311-9739-E77D186C70FC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW2API", "GW2API\GW2API.csproj", "{CB155B2D-C68A-46AB-8AFC-8472A906FB05}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{A2DAF710-FC9C-4D23-A79B-B0D48799D00D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2DAF710-FC9C-4D23-A79B-B0D48799D00D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2DAF710-FC9C-4D23-A79B-B0D48799D00D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A519B285-9204-4311-9739-E77D186C70FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A519B285-9204-4311-9739-E77D186C70FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A519B285-9204-4311-9739-E77D186C70FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A519B285-9204-4311-9739-E77D186C70FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CB155B2D-C68A-46AB-8AFC-8472A906FB05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB155B2D-C68A-46AB-8AFC-8472A906FB05}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CB155B2D-C68A-46AB-8AFC-8472A906FB05}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CB155B2D-C68A-46AB-8AFC-8472A906FB05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

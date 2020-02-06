@@ -24,10 +24,9 @@ namespace GuildWarsBuildSaver.Controllers
 
         // GET: api/Build/5
         [HttpGet("{id}", Name = "GetBuild")]
-        public async Task<ActionResult<Build>> Get(string id)
+        public async Task<Build> Get(string id)
         {
-            var build = await _buildService.GetBuild(id);
-            return build == null ? NotFound() : (ActionResult<Build>) build.Resource;
+            return await _buildService.GetBuild(id);
         }
 
         // POST: api/Build
@@ -47,7 +46,6 @@ namespace GuildWarsBuildSaver.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromForm] Build build)
         {
-            Console.WriteLine(build.Id);
             var res = await _buildService.UpdateBuild(id, build);
             if (res == null)
                 return BadRequest();

@@ -8,16 +8,16 @@ namespace GuildWarsBuildSaver.Services
 {
     public interface IBuildService
     {
-        Task<ItemResponse<Build>> CreateBuild(Build build);
+        Task<Build> CreateBuild(Build build);
 
         Task DeleteBuild(string id);
 
-        Task<ItemResponse<Build>> GetBuild(string name);
+        Task<Build> GetBuild(string name);
 
         Task<IEnumerable<Build>> GetBuilds();
 
-        Task<ItemResponse<Build>> UpdateBuild(string id, Build build);
+        Task<Build> UpdateBuild(string id, Build build);
 
-        Task<List<Build>> GetBuildByProfession(string profession);
+        Task<IEnumerable<Build>> GetBuildByProfession(string profession);
     }
 }
