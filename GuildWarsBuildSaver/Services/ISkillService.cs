@@ -1,25 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using GuildWarsBuildSaver.Models;
-using Microsoft.Azure.Cosmos;
 
 namespace GuildWarsBuildSaver.Services
 {
     public interface ISkillService
     {   
-        Task AddItemAsync(Skill skill);
+        Task AddSkill(Skill skill);
 
-        Task DeleteItemAsync(string id);
+        Task DeleteSkill(string id);
 
-        Task<Skill> GetItemAsync(string name);
+        Task<Skill> GetSkill(string id);
 
-        Task<IEnumerable<Skill>> GetItemsAsync(string queryString);
+        Task<IEnumerable<Skill>> GetSkills();
 
-        Task UpdateItemAsync(string id, Skill skill);
+        Task UpdateSkill(string id, Skill skill);
 
-        Task<Skill> GetSkillFromDBAsync(string name, string id);
-
-        Task<List<Skill>> GetSkillsByProfession(string profession);
+        Task<IEnumerable<Skill>> GetSkillsByProfession(string profession);
 
         Skill GetItemFromList(List<Skill> list, string id);
         

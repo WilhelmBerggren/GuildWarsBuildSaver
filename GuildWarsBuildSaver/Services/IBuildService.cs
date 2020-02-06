@@ -1,29 +1,23 @@
 ﻿using GuildWarsBuildSaver.Models;
+using Microsoft.Azure.Cosmos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GuildWarsBuildSaver.Services
 {
-    interface IBuildService
+    public interface IBuildService
     {
-        Task AddItemAsync(Build build);
+        Task<ItemResponse<Build>> CreateBuild(Build build);
 
-        Task DeleteItemAsync(string id);
+        Task DeleteBuild(string id);
 
-        Task<Build> GetItemAsync(string name);
+        Task<ItemResponse<Build>> GetBuild(string name);
 
-        Task<IEnumerable<Build>> GetItemsAsync(string queryString);
+        Task<IEnumerable<Build>> GetBuilds();
 
-        Task UpdateItemAsync(string id, Build build);
-
-        Task<Build> GetSkillFromDBAsync(string name, string id);
+        Task<ItemResponse<Build>> UpdateBuild(string id, Build build);
 
         Task<List<Build>> GetBuildByProfession(string profession);
-
-        Build GetItemFromList(List<Build> list, string id);
-
-        IEnumerable<Build> FilterList(List<Build> list, string requestedFilter);
     }
 }

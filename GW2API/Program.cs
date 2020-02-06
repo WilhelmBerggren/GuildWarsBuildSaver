@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using GuildWarsBuildSaver.Models;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
-namespace GuildWarsBuildSaver
+namespace GW2API
 {
     public class Program
     {
@@ -26,5 +22,5 @@ namespace GuildWarsBuildSaver
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-     }
+    }
 }

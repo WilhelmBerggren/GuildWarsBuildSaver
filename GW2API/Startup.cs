@@ -10,11 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using GuildWarsBuildSaver.Models;
-using GuildWarsBuildSaver.Services;
 
-namespace GuildWarsBuildSaver
+namespace GW2API
 {
     public class Startup
     {
@@ -28,14 +25,6 @@ namespace GuildWarsBuildSaver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<DatabaseSettings>(
-                Configuration.GetSection(nameof(DatabaseSettings)));
-
-            services.AddSingleton<IDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-
-            services.AddSingleton<BuildService>();
-            services.AddSingleton<SkillService>();
             services.AddControllers();
         }
 

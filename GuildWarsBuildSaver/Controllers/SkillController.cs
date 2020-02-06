@@ -22,7 +22,7 @@ namespace GuildWarsBuildSaver.Controllers
 
         // GET: api/Skill
         [HttpGet]
-        public async Task<IEnumerable<Skill>> Get()
+        public async Task<IEnumerable<Skill>> GetSkill()
         {
             //Console.WriteLine(_skillService);
             var asdf = await _skillService.GetSkillsByProfession("Thief"); //.GetItemsAsync("select * from c");
@@ -31,30 +31,10 @@ namespace GuildWarsBuildSaver.Controllers
 
 
         // GET: api/Skill/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name ="GetSkill")]
         public async Task<Skill>Get(string id)
         {
-            return await _skillService.GetItemAsync(id, "Utility");
-
-            //return "value";
-        }
-
-        // POST: api/Skill
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Skill/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return await _skillService.GetSkill(id);
         }
     }
 }
