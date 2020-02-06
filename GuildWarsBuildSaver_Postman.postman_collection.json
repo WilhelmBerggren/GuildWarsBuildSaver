@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "4cd68257-8cbb-469c-802c-d37a16c3d711",
+		"name": "GuildWarsBuildSaver_Postman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get skill",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/Skill/5487",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Skill",
+						"5487"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all skills",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/Skill",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Skill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create build",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "MyBuild",
+							"type": "text"
+						},
+						{
+							"key": "profession",
+							"value": "Thief",
+							"type": "text"
+						},
+						{
+							"key": "heal",
+							"value": "13021",
+							"type": "text"
+						},
+						{
+							"key": "mainHandWeapon",
+							"value": "Dagger",
+							"type": "text"
+						},
+						{
+							"key": "offHandWeapon",
+							"value": "Dagger",
+							"type": "text"
+						},
+						{
+							"key": "mainHandSwap",
+							"value": "Shortbow",
+							"type": "text"
+						},
+						{
+							"key": "utility1",
+							"value": "13044",
+							"type": "text"
+						},
+						{
+							"key": "utility2",
+							"value": "13046",
+							"type": "text"
+						},
+						{
+							"key": "utility3",
+							"value": "13060",
+							"type": "text"
+						},
+						{
+							"key": "elite",
+							"value": "13085",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/Build/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Build",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all builds",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/Build/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Build",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update build",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "MyBuild",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "MyBuild",
+							"type": "text"
+						},
+						{
+							"key": "profession",
+							"value": "Thief",
+							"type": "text"
+						},
+						{
+							"key": "heal",
+							"value": "13021",
+							"type": "text"
+						},
+						{
+							"key": "mainHandWeapon",
+							"value": "Sword",
+							"type": "text"
+						},
+						{
+							"key": "offHandWeapon",
+							"value": "Dagger",
+							"type": "text"
+						},
+						{
+							"key": "mainHandSwap",
+							"value": "Shortbow",
+							"type": "text"
+						},
+						{
+							"key": "utility1",
+							"value": "13044",
+							"type": "text"
+						},
+						{
+							"key": "utility2",
+							"value": "13046",
+							"type": "text"
+						},
+						{
+							"key": "utility3",
+							"value": "13060",
+							"type": "text"
+						},
+						{
+							"key": "elite",
+							"value": "13085",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/Build/MyBuild",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Build",
+						"MyBuild"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get build",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/Build/MyBuild",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Build",
+						"MyBuild"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete build",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5001/api/Build/MyBuild",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Build",
+						"MyBuild"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

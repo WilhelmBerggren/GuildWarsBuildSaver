@@ -14,21 +14,21 @@ namespace GuildWarsBuildSaver.Services
     {
         private readonly Container _container;
         private readonly IDatabaseSettings settings;
+        private readonly CosmosClient _client;
 
         public SkillService(IDatabaseSettings settings)
         {
             this.settings = settings;
             var clientBuilder = new CosmosClientBuilder(settings.Account, settings.Key);
-            CosmosClient client = clientBuilder.WithConnectionModeDirect().Build();
-            EnsureCreated(client);
-            this._container = client.GetContainer(settings.DatabaseName, settings.SkillContainerName);
+            _client = clientBuilder.WithConnectionModeDirect().Build();
+            this._container = _client.GetContainer(settings.DatabaseName, settings.SkillContainerName);
         }
 
-        private async void EnsureCreated(CosmosClient client)
+        public async void EnsureCreated()
         {
             if(settings.RebuildDB.Equals("True"))
             {
-                await RebuildDb(client);
+                await RebuildDb(_client);
             }
         }
 

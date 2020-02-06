@@ -43,7 +43,9 @@ namespace GuildWarsBuildSaver
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.ApplicationServices.GetService<SkillService>();
+            //Hellre köra skillservice ensurecreated anroppet här så det syns i startup förfarandet /alternativt i program eller whatever.
+            app.ApplicationServices.GetService<SkillService>().EnsureCreated();
+            app.ApplicationServices.GetService<BuildService>().EnsureCreated();
 
             if (env.IsDevelopment())
             {

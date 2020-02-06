@@ -37,7 +37,7 @@ namespace GuildWarsBuildSaver.Controllers
         public async Task<IActionResult> Post([FromForm] Build build)
         {
             build.Id = build.Name;
-            Console.WriteLine(build);
+            Console.WriteLine(build); //Det borde finnas en logger klass som ni kan använda istället
             var res = await _buildService.CreateBuild(build);
             if(res == null)
                 return BadRequest();

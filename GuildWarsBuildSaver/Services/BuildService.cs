@@ -11,21 +11,21 @@ namespace GuildWarsBuildSaver.Services
     {
         private Container _container;
         private readonly IDatabaseSettings settings;
+        private readonly CosmosClient _client;
 
         public BuildService(IDatabaseSettings settings)
         {
             var clientBuilder = new CosmosClientBuilder(settings.Account, settings.Key);
             this.settings = settings;
 
-            CosmosClient client = clientBuilder.WithConnectionModeDirect().Build();
-            EnsureCreated(client);
+            _client = clientBuilder.WithConnectionModeDirect().Build();
 
-            this._container = client.GetContainer(settings.DatabaseName, settings.BuildContainerName);
+            this._container = _client.GetContainer(settings.DatabaseName, settings.BuildContainerName);
         }
 
-        private async void EnsureCreated(CosmosClient client)
+        public async void EnsureCreated()
         {
-            Database database = await client.CreateDatabaseIfNotExistsAsync(settings.DatabaseName);
+            Database database = await _client.CreateDatabaseIfNotExistsAsync(settings.DatabaseName);
             await database.CreateContainerIfNotExistsAsync(settings.BuildContainerName, "/id");
         }
 
