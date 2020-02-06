@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using GuildWarsBuildSaver.Models;
 using GuildWarsBuildSaver.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GuildWarsBuildSaver.Controllers
@@ -16,11 +13,17 @@ namespace GuildWarsBuildSaver.Controllers
     {
         private BuildService _buildService;
 
-        public BuildController(BuildService buildService) => _buildService = buildService;
+        public BuildController(BuildService buildService)
+        {
+            _buildService = buildService;
+        }
 
         // GET: api/Build
         [HttpGet]
-        public Task<IEnumerable<Build>> GetBuilds() => _buildService.GetBuilds();
+        public Task<IEnumerable<Build>> GetBuilds()
+        {
+            return _buildService.GetBuilds();
+        }
 
         // GET: api/Build/5
         [HttpGet("{id}", Name = "GetBuild")]

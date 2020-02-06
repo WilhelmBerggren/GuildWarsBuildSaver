@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GuildWarsBuildSaver.Models
+﻿namespace GuildWarsBuildSaver.Models
 {
     public class DatabaseSettings : IDatabaseSettings
     {
@@ -12,6 +7,7 @@ namespace GuildWarsBuildSaver.Models
         public string DatabaseName { get; set; }
         public string SkillContainerName { get; set; }
         public string BuildContainerName { get; set; }
+        public string RebuildDB { get; set; }
     }
     public interface IDatabaseSettings
     {
@@ -20,5 +16,6 @@ namespace GuildWarsBuildSaver.Models
         string DatabaseName { get; set; }
         string SkillContainerName { get; set; }
         string BuildContainerName { get; set; }
+        string RebuildDB { get; }
     }
 }

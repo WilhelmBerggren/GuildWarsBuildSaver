@@ -1,7 +1,6 @@
 ﻿using GuildWarsBuildSaver.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,8 +33,8 @@ namespace GuildWarsBuildSaver.Services
         {
             if (ValidBuild(build))
                 return await _container.CreateItemAsync<Build>(build);
-            else
-                return null;
+            
+            return null;
         }
 
         private bool ValidBuild(Build build)

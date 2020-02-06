@@ -26,7 +26,7 @@ namespace GuildWarsBuildSaver.Services
 
         private async void EnsureCreated(CosmosClient client)
         {
-            if (client.GetDatabase(settings.DatabaseName) == null)
+            if(settings.RebuildDB.Equals("True"))
             {
                 await RebuildDb(client);
             }
@@ -125,7 +125,7 @@ namespace GuildWarsBuildSaver.Services
             //If DB exists remove it before proceeding
             try
             {
-                await cosmosClient.GetDatabase("SkillsDB").DeleteAsync();
+                await cosmosClient.GetDatabase(settings.DatabaseName).DeleteAsync();
                 Console.WriteLine("Replacing existing DB");
             }
             catch
@@ -134,7 +134,7 @@ namespace GuildWarsBuildSaver.Services
             }
 
             //Create DB and reference to DB
-            Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SkillsDB");
+            Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync(settings.DatabaseName);
             Console.WriteLine("Created Database: {0}\n", database.Id);
 
             //Create Container and reference to DB
@@ -151,6 +151,7 @@ namespace GuildWarsBuildSaver.Services
                 skills = (List<Skill>)serializer.Deserialize(file, typeof(List<Skill>));
             }
 
+            //Only insert skills belonging to a single profession
             var query = from skill in skills
                         where skill.Professions != null && skill.Professions.Count == 1
                         select skill;
