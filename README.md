@@ -1,6 +1,6 @@
 # GuildWars Build Saver
 
-[Planned] API and frontend for managing GW2 builds
+API for managing builds in Guild Wars 2
 
 ## API
 Generate builds using a saved copy of [GW2 API v2](https://api.guildwars2.com/) and save using Azure CosmosDb.
@@ -40,6 +40,8 @@ Example:
     }
   }
 </pre>
+
+Note: Requires a T-SQL Server running, see GuildWarsBuildSaver/appsettings.json
 
 ## Frontend
 To be continued
