@@ -3,6 +3,7 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GuildWarsBuildSaver.Services
@@ -25,8 +26,16 @@ namespace GuildWarsBuildSaver.Services
 
         public async void EnsureCreated()
         {
-            Database database = await _client.CreateDatabaseIfNotExistsAsync(settings.DatabaseName);
-            await database.CreateContainerIfNotExistsAsync(settings.BuildContainerName, "/id");
+            try
+            {
+                Database database = await _client.CreateDatabaseIfNotExistsAsync(settings.DatabaseName);
+                await database.CreateContainerIfNotExistsAsync(settings.BuildContainerName, "/id");
+            }
+            catch (HttpRequestException e)
+            {
+                System.Console.WriteLine("Could not connect to the database");
+                throw e;
+            }
         }
 
         public async Task<Build> CreateBuild(Build build)
